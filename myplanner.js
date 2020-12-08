@@ -16,7 +16,7 @@ displayCurrentDay();
 //Current Hour 
 var currentDate = new Date();
 var currentHour = currentDate.getHours();
-
+var timeBlock = document.querySelector(".time-block");
 
 //Assign id to each time-block area.
 
@@ -36,14 +36,17 @@ var fivePm = $("#fivePm");
 
 var workHours = [9, 10, 11, 12, 13, 14, 15, 16, 17];
 
+
+// savedTimeBlock()
 function renderTimeBlock() {
-    
     for (var i = 0; i < workHours.length; i++) {
-           
+        timeBlock.innerHTML = 
+        localStorage.getItem(dataTime)
+
         var pastTime = workHours.filter((workhour) => workhour < currentHour);
         console.log(pastTime[i])
        
-        
+    
         switch (pastTime[i]) {
             case 9:
                 nineAm.addClass("past form-control time-block");
@@ -148,18 +151,30 @@ function renderTimeBlock() {
 
 renderTimeBlock()
 
-$(".saveBtn").on("click", function(){
+var  dataTime;
+var dataValue;
 
- var dataTime = $(this).attr("data-time");
- var dataValue = this.previousElementSibling.value
+$(".saveBtn").on("click", function(){
+//   console.log(dataValue)
+ dataTime = $(this).attr("data-time");
+ dataValue = this.previousElementSibling.value
 
  localStorage.setItem(dataTime, dataValue)
 
+
 })
 
-//on page load
-    //get all the local storage stuff,
-    //put it on the page
+$(".saveBtn").each(function() {
+    // here you are recovering the data-time from every button 
+    var dataTime = $(this).attr("data-time");
+   /// here you read the localstorage to see if you have something stored
+    var info =localStorage.getItem(dataTime)
+   this.previousElementSibling.value = info
+   
+   })
 
+
+
+ 
 
 
