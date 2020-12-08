@@ -18,7 +18,6 @@ var currentDate = new Date();
 var currentHour = currentDate.getHours();
 
 
-
 //Assign id to each time-block area.
 
 var nineAm = $("#nineAm");
@@ -32,18 +31,19 @@ var fourPm = $("#fourPm");
 var fivePm = $("#fivePm");
 
 
+
 //render timeblock
 
 var workHours = [9, 10, 11, 12, 13, 14, 15, 16, 17];
 
 function renderTimeBlock() {
-
+    
     for (var i = 0; i < workHours.length; i++) {
-
+           
         var pastTime = workHours.filter((workhour) => workhour < currentHour);
-        console.log(pastTime);
-        //var pastTime =[9,10];
-
+        console.log(pastTime[i])
+       
+        
         switch (pastTime[i]) {
             case 9:
                 nineAm.addClass("past form-control time-block");
@@ -73,7 +73,8 @@ function renderTimeBlock() {
 
 
         var presentTime = workHours.filter((workhour) => workhour === currentHour)
-        console.log(presentTime);
+        console.log(presentTime[i])
+       
 
         switch (presentTime[i]) {
             case 9:
@@ -109,7 +110,7 @@ function renderTimeBlock() {
 
 
         var futureTime = workHours.filter((workhour) => workhour > currentHour)
-        console.log(futureTime);
+       
         switch (futureTime[i]) {
             case 9:
                 nineAm.addClass("future form-control time-block");
@@ -147,18 +148,18 @@ function renderTimeBlock() {
 
 renderTimeBlock()
 
+$(".saveBtn").on("click", function(){
+
+ var dataTime = $(this).attr("data-time");
+ var dataValue = this.previousElementSibling.value
+
+ localStorage.setItem(dataTime, dataValue)
+
+})
+
+//on page load
+    //get all the local storage stuff,
+    //put it on the page
 
 
 
-$(document).on("click", "button", function (e) {
-    e.preventDefault();
-    var target = e.currentTarget;
-  
-
-    console.log(target.previousElementSibling.value)
-  
-
-    localStorage.setItem(target.previousElementSibling.id, target.previousElementSibling.value);
-
-
-});
