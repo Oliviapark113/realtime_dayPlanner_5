@@ -16,7 +16,6 @@ displayCurrentDay();
 //Current Hour 
 var currentDate = new Date();
 var currentHour = currentDate.getHours();
-var timeBlock = document.querySelector(".time-block");
 
 //Assign id to each time-block area.
 
@@ -31,9 +30,8 @@ var fourPm = $("#fourPm");
 var fivePm = $("#fivePm");
 
 
-
 //render timeblock
-
+//setting workHours vaiables in array 
 var workHours = [9, 10, 11, 12, 13, 14, 15, 16, 17];
 
 
@@ -41,11 +39,13 @@ var workHours = [9, 10, 11, 12, 13, 14, 15, 16, 17];
 function renderTimeBlock() {
     for (var i = 0; i < workHours.length; i++) {
        
+       //fiter pastTime , presentTime and futureTime 
 
         var pastTime = workHours.filter((workhour) => workhour < currentHour);
         console.log(pastTime[i])
        
-    
+        // render colorblock with each pastTime, presentTime and future Time using switch statement 
+
         switch (pastTime[i]) {
             case 9:
                 nineAm.addClass("past form-control time-block");
@@ -152,7 +152,7 @@ renderTimeBlock()
 
 var  dataTime;
 var dataValue;
-
+//when saveBtn clicked input value saved into localStorage.
 $(".saveBtn").on("click", function(){
  dataTime = $(this).attr("data-time");
  dataValue = this.previousElementSibling.value
@@ -163,8 +163,10 @@ $(".saveBtn").on("click", function(){
 })
 
 $(".saveBtn").each(function() {
-   
+   //get value from localStorage.
+   //so reassign dataTime key and value 
     var dataTime = $(this).attr("data-time");
+    //Now add value into text area so value will pesist after refreshing.
     var info =localStorage.getItem(dataTime)
    this.previousElementSibling.value = info
    
