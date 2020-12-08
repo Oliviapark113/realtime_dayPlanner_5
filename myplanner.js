@@ -40,8 +40,7 @@ var workHours = [9, 10, 11, 12, 13, 14, 15, 16, 17];
 // savedTimeBlock()
 function renderTimeBlock() {
     for (var i = 0; i < workHours.length; i++) {
-        timeBlock.innerHTML = 
-        localStorage.getItem(dataTime)
+       
 
         var pastTime = workHours.filter((workhour) => workhour < currentHour);
         console.log(pastTime[i])
@@ -76,7 +75,7 @@ function renderTimeBlock() {
 
 
         var presentTime = workHours.filter((workhour) => workhour === currentHour)
-        console.log(presentTime[i])
+      
        
 
         switch (presentTime[i]) {
@@ -155,7 +154,6 @@ var  dataTime;
 var dataValue;
 
 $(".saveBtn").on("click", function(){
-//   console.log(dataValue)
  dataTime = $(this).attr("data-time");
  dataValue = this.previousElementSibling.value
 
@@ -165,9 +163,8 @@ $(".saveBtn").on("click", function(){
 })
 
 $(".saveBtn").each(function() {
-    // here you are recovering the data-time from every button 
+   
     var dataTime = $(this).attr("data-time");
-   /// here you read the localstorage to see if you have something stored
     var info =localStorage.getItem(dataTime)
    this.previousElementSibling.value = info
    
