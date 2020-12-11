@@ -16,7 +16,7 @@ displayCurrentDay();
 //Current Hour 
 var currentDate = new Date();
 var currentHour = currentDate.getHours();
-
+console.log(currentHour)
 //Assign id to each time-block area.
 
 var nineAm = $("#nineAm");
@@ -29,6 +29,7 @@ var threePm = $("#threePm");
 var fourPm = $("#fourPm");
 var fivePm = $("#fivePm");
 
+var timeBlock=[nineAm, tenAm ,eleAm ,twelPm,onePm,twoPm,threePm,fourPm,fivePm] 
 
 //render timeblock
 //setting workHours vaiables in array 
@@ -39,110 +40,19 @@ var workHours = [9, 10, 11, 12, 13, 14, 15, 16, 17];
 function renderTimeBlock() {
     for (var i = 0; i < workHours.length; i++) {
        
-       //fiter pastTime , presentTime and futureTime 
-
-        var pastTime = workHours.filter((workhour) => workhour < currentHour);
-        console.log(pastTime[i])
-       
-        // render colorblock with each pastTime, presentTime and future Time using switch statement 
-
-        switch (pastTime[i]) {
-            case 9:
-                nineAm.addClass("past form-control time-block");
-                break;
-            case 10:
-                tenAm.addClass("past form-control time-block");
-                break;
-            case 11:
-                eleAm.addClass("past form-control time-block");
-            case 12:
-                twelPm.addClass("past form-control time-block");
-                break;
-            case 13:
-                onePm.addClass("past form-control time-block");
-                break;
-            case 14:
-                twoPm.addClass("past form-control time-block");
-            case 15:
-                threePm.addClass("past form-control time-block");
-                break;
-            case 16:
-                fourPm.addClass("past form-control time-block");
-                break;
-            case 17:
-                fivePm.addClass("past form-control time-block");
-        }
-
-
-        var presentTime = workHours.filter((workhour) => workhour === currentHour)
-      
-       
-
-        switch (presentTime[i]) {
-            case 9:
-                nineAm.addClass("present form-control time-block");
-                break;
-            case 10:
-                tenAm.addClass("present form-control time-block");
-                break;
-            case 11:
-                eleAm.addClass("present form-control time-block");
-                break;
-            case 12:
-                twelPm.addClass("present form-control time-block");
-                break;
-            case 13:
-                onePm.addClass("present form-control time-block");
-                break;
-            case 14:
-                twoPm.addClass("present form-control time-block");
-                break;
-            case 15:
-                threePm.addClass("present form-control time-block");
-                break;
-            case 16:
-                fourPm.addClass("present form-control time-block");
-                break;
-            case 17:
-                fivePm.addClass("present form-control time-block");
-                break;
-
+        if(workHours[i]< currentHour){
+            timeBlock[i].addClass("past form-control time-block")
 
         }
 
-
-        var futureTime = workHours.filter((workhour) => workhour > currentHour)
-       
-        switch (futureTime[i]) {
-            case 9:
-                nineAm.addClass("future form-control time-block");
-                break;
-            case 10:
-                tenAm.addClass("future form-control time-block");
-                break;
-            case 11:
-                eleAm.addClass("future form-control time-block");
-                break;
-            case 12:
-                twelPm.addClass("future form-control time-block");
-                break;
-            case 13:
-                onePm.addClass("future form-control time-block");
-                break;
-            case 14:
-                twoPm.addClass("future form-control time-block");
-                break;
-            case 15:
-                threePm.addClass("future form-control time-block");
-                break;
-            case 16:
-                fourPm.addClass("future form-control time-block");
-                break;
-            case 17:
-                fivePm.addClass("future form-control time-block");
-                break;
-
+        else if (workHours[i]=== currentHour){
+            timeBlock[i].addClass("present form-control time-block")
         }
+
+        else if (workHours[i]> currentHour){
+            timeBlock[i].addClass("future form-control time-block")
+        }
+        
 
     }
 
